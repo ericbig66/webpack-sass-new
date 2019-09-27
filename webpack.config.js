@@ -45,6 +45,33 @@ module.exports = {
                         }
                     }
                 ],
+            },
+            //image files
+            {
+            test:/\.(png|jpg|jpe?g|gif)$/,
+            use: [
+                {
+                    loader:"url-loader",
+                    options:{
+                        name:"[name]-[hash:5].min.[ext]",
+                        limit: 2000,//size <=20KB
+                        publicPath:"static/",
+                        outputPath:"static/",
+                    }
+                }
+            ]
+        },
+            //Font files
+            {
+                test:/\.(woff|woff2|ttf|otf|eot|svg)$/,
+                loader:'file-loader',
+                include:[/fonts/],
+
+                options:{
+                    name: '[hash].[ext]',
+                    outputPath:'css/',
+                    publicPath: url => '../css/' + url
+                }
             }
         ]   //rules end
     },
